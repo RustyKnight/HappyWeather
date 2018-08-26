@@ -24,6 +24,7 @@
 		128FF8FD212FD4F600CA3469 /* WeatherStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128FF8FC212FD4F600CA3469 /* WeatherStyleKit.swift */; };
 		12AB0F44212FDADD003D0C39 /* AnimatorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */; };
 		12AB0F45212FDADD003D0C39 /* AnimatorKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		70DF7F98213229C70066ABFC /* HudViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF7F97213229C70066ABFC /* HudViewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		128FF8F8212FD1B000CA3469 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		128FF8FC212FD4F600CA3469 /* WeatherStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherStyleKit.swift; sourceTree = "<group>"; };
 		12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AnimatorKit.framework; path = Carthage/Build/iOS/AnimatorKit.framework; sourceTree = "<group>"; };
+		70DF7F97213229C70066ABFC /* HudViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudViewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 			children = (
 				124F1CED212FB78B0062E35B /* ViewController.swift */,
 				124F1D29212FC2B60062E35B /* PostLaunchViewController.swift */,
+				70DF7F97213229C70066ABFC /* HudViewViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				124F1D24212FBEC00062E35B /* Configuration.swift in Sources */,
 				128FF8FD212FD4F600CA3469 /* WeatherStyleKit.swift in Sources */,
 				124F1D2A212FC2B60062E35B /* PostLaunchViewController.swift in Sources */,
+				70DF7F98213229C70066ABFC /* HudViewViewController.swift in Sources */,
 				124F1CEE212FB78B0062E35B /* ViewController.swift in Sources */,
 				124F1CEC212FB78B0062E35B /* AppDelegate.swift in Sources */,
 			);
@@ -521,7 +525,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 337Z8P6WA4;
+				DEVELOPMENT_TEAM = YWXH886EY3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -543,7 +547,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 337Z8P6WA4;
+				DEVELOPMENT_TEAM = YWXH886EY3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

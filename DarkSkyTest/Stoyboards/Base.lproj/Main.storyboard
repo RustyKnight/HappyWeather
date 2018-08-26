@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DpR-TD-B8O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bTS-hn-otr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -107,6 +107,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Exg-ka-fEe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1855" y="733"/>
+        </scene>
+        <!--Hud View View Controller-->
+        <scene sceneID="kCb-UD-bSk">
+            <objects>
+                <viewController id="bTS-hn-otr" customClass="HudViewViewController" customModule="DarkSkyTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="29a-ML-z4p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nfB-7n-oAm">
+                                <rect key="frame" x="37.5" y="183.5" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="kba-FM-JZt"/>
+                                    <constraint firstAttribute="width" constant="300" id="myG-SH-mKQ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nfB-7n-oAm" firstAttribute="centerX" secondItem="29a-ML-z4p" secondAttribute="centerX" id="glC-gb-d2G"/>
+                            <constraint firstItem="nfB-7n-oAm" firstAttribute="centerY" secondItem="29a-ML-z4p" secondAttribute="centerY" id="o5c-vf-kzQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="k8c-2c-6VU"/>
+                    </view>
+                    <connections>
+                        <outlet property="hudImageView" destination="nfB-7n-oAm" id="nK1-kE-zgY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GO2-yZ-K1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1855" y="-769"/>
         </scene>
     </scenes>
     <resources>

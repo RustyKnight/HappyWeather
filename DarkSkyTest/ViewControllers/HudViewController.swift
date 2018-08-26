@@ -8,9 +8,11 @@
 
 import UIKit
 
-class HudViewViewController: UIViewController {
+class HudViewController: UIViewController {
 	
 	@IBOutlet weak var hudImageView: UIImageView!
+	
+	var weather: Weather?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

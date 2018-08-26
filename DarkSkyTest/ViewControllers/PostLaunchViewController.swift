@@ -10,6 +10,7 @@ import UIKit
 import Hydra
 import CoreLocation
 import AnimatorKit
+import ForecastIO
 
 class PostLaunchViewController: UIViewController {
 
@@ -22,6 +23,10 @@ class PostLaunchViewController: UIViewController {
 	var angle: Double = 0
 	
 	var userLocation: CLLocation?
+	
+	let forecast = DarkSkyClient(apiKey: Configuration.apiKey)
+	var weather: Weather?
+	var error: Error?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -64,7 +69,30 @@ class PostLaunchViewController: UIViewController {
 		manager.stopUpdatingLocation()
 		userLocation = location
 		UIView.animate(withDuration: 1.0) {
-			self.statusLabel.text = "Looking out the window"
+			self.statusLabel.text = "Looking out the window..."
+		}
+		
+		forecast.language = .english
+		//forecast.units = .si
+		forecast.getForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { (result) in
+			switch result {
+			case .success(let currentForecast, let metaData):
+				self.weather = Weather(forecast: currentForecast, metaData: metaData)
+				self.performSegue(withIdentifier: "happy", sender: self)
+				break
+			case .failure(let error):
+				self.error = error
+				self.performSegue(withIdentifier: "sad", sender: self)
+				break
+			}
+		}
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let controller = segue.destination as? HudViewController, segue.identifier == "happy" {
+			controller.weather = weather
+		} else if let controller = segue.destination as? SadViewController, segue.identifier == "happy" {
+			controller.error = error
 		}
 	}
 	

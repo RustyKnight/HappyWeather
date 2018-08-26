@@ -29,6 +29,8 @@ xcuserdata
 *.hmap
 *.ipa
 
+Configuration/Config.txt
+
 # CocoaPods
 #
 # We recommend against adding the Pods directory to your .gitignore. However
@@ -42,41 +44,10 @@ xcuserdata
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
 Carthage/Checkouts/
 
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://github.com/fastlane/fastlane/blob/master/docs/Gitignore.md
-fastlane/reports
-
-# fastlane specific
-fastlane/report.xml
-
-# deliver temporary files
-fastlane/Preview.html
-
-# snapshot generated screenshots
-fastlane/screenshots
-
-# scan temporary files
-fastlane/test_output
-
-Cioffi_Core/fastlane/report.xml
-Cioffi_Core/fastlane/screenshots
-Cioffi_Core/fastlane/test_output
-Cioffi_Core/fastlane/slather_output
-
-Cioffi/fastlane/report.xml
-Cioffi/fastlane/screenshots
-Cioffi/fastlane/test_output
-
-# Jazzy
-Cioffi_Core/docs
-
 # AppCode
 .idea/
 frameworks/carthage/Carthage/Checkouts
 Carthage/Build
 fastlane/builds
 *.cer
+/DarkSkyTest/Configuration/Config.txt

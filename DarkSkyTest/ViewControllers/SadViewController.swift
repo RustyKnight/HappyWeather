@@ -9,14 +9,12 @@
 import UIKit
 import ForecastIO
 
-class ViewController: UIViewController {
+class SadViewController: UIViewController {
 
+	var error: Error?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		let client = DarkSkyClient(apiKey: Configuration.apiKey)
-		client.language = .english
-		client.units = .si
 	}
 
 }

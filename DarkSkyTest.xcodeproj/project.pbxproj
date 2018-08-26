@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		124F1CEC212FB78B0062E35B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124F1CEB212FB78B0062E35B /* AppDelegate.swift */; };
-		124F1CEE212FB78B0062E35B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124F1CED212FB78B0062E35B /* ViewController.swift */; };
+		124F1CEE212FB78B0062E35B /* SadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124F1CED212FB78B0062E35B /* SadViewController.swift */; };
 		124F1CF1212FB78B0062E35B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 124F1CEF212FB78B0062E35B /* Main.storyboard */; };
 		124F1CF6212FB78C0062E35B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 124F1CF4212FB78C0062E35B /* LaunchScreen.storyboard */; };
 		124F1D01212FB78C0062E35B /* DarkSkyTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124F1D00212FB78C0062E35B /* DarkSkyTestTests.swift */; };
@@ -20,11 +20,13 @@
 		124F1D27212FC0410062E35B /* Hydra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124F1D26212FC0410062E35B /* Hydra.framework */; };
 		124F1D28212FC0410062E35B /* Hydra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 124F1D26212FC0410062E35B /* Hydra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		124F1D2A212FC2B60062E35B /* PostLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124F1D29212FC2B60062E35B /* PostLaunchViewController.swift */; };
+		128DD80E21335F2E0080CB65 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128DD80D21335F2E0080CB65 /* Weather.swift */; };
+		128DD811213364730080CB65 /* Config.txt in Resources */ = {isa = PBXBuildFile; fileRef = 128DD810213364730080CB65 /* Config.txt */; };
 		128FF8F9212FD1B000CA3469 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 128FF8F8212FD1B000CA3469 /* Assets.xcassets */; };
 		128FF8FD212FD4F600CA3469 /* WeatherStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128FF8FC212FD4F600CA3469 /* WeatherStyleKit.swift */; };
 		12AB0F44212FDADD003D0C39 /* AnimatorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */; };
 		12AB0F45212FDADD003D0C39 /* AnimatorKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		70DF7F98213229C70066ABFC /* HudViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF7F97213229C70066ABFC /* HudViewViewController.swift */; };
+		70DF7F98213229C70066ABFC /* HudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF7F97213229C70066ABFC /* HudViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +65,7 @@
 /* Begin PBXFileReference section */
 		124F1CE8212FB78B0062E35B /* DarkSkyTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarkSkyTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		124F1CEB212FB78B0062E35B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		124F1CED212FB78B0062E35B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		124F1CED212FB78B0062E35B /* SadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SadViewController.swift; sourceTree = "<group>"; };
 		124F1CF0212FB78B0062E35B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		124F1CF5212FB78C0062E35B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		124F1CF7212FB78C0062E35B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,10 +80,12 @@
 		124F1D23212FBEC00062E35B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		124F1D26212FC0410062E35B /* Hydra.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hydra.framework; path = Carthage/Build/iOS/Hydra.framework; sourceTree = "<group>"; };
 		124F1D29212FC2B60062E35B /* PostLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLaunchViewController.swift; sourceTree = "<group>"; };
+		128DD80D21335F2E0080CB65 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		128DD810213364730080CB65 /* Config.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Config.txt; sourceTree = "<group>"; };
 		128FF8F8212FD1B000CA3469 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		128FF8FC212FD4F600CA3469 /* WeatherStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherStyleKit.swift; sourceTree = "<group>"; };
 		12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AnimatorKit.framework; path = Carthage/Build/iOS/AnimatorKit.framework; sourceTree = "<group>"; };
-		70DF7F97213229C70066ABFC /* HudViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudViewViewController.swift; sourceTree = "<group>"; };
+		70DF7F97213229C70066ABFC /* HudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,8 @@
 		124F1CEA212FB78B0062E35B /* DarkSkyTest */ = {
 			isa = PBXGroup;
 			children = (
+				128DD80F2133645A0080CB65 /* Configuration */,
+				128DD80C21335F1A0080CB65 /* Models */,
 				128FF8F3212FCD0F00CA3469 /* StyleKit */,
 				124F1D21212FBE930062E35B /* Assets */,
 				124F1D1F212FBE6C0062E35B /* Stoyboards */,
@@ -178,9 +184,9 @@
 		124F1D20212FBE820062E35B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				124F1CED212FB78B0062E35B /* ViewController.swift */,
+				124F1CED212FB78B0062E35B /* SadViewController.swift */,
 				124F1D29212FC2B60062E35B /* PostLaunchViewController.swift */,
-				70DF7F97213229C70066ABFC /* HudViewViewController.swift */,
+				70DF7F97213229C70066ABFC /* HudViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -201,6 +207,22 @@
 				124F1D23212FBEC00062E35B /* Configuration.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		128DD80C21335F1A0080CB65 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				128DD80D21335F2E0080CB65 /* Weather.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		128DD80F2133645A0080CB65 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				128DD810213364730080CB65 /* Config.txt */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		128FF8F3212FCD0F00CA3469 /* StyleKit */ = {
@@ -319,6 +341,7 @@
 				124F1CF6212FB78C0062E35B /* LaunchScreen.storyboard in Resources */,
 				124F1D1E212FBDEF0062E35B /* DarkSky.json in Resources */,
 				128FF8F9212FD1B000CA3469 /* Assets.xcassets in Resources */,
+				128DD811213364730080CB65 /* Config.txt in Resources */,
 				124F1CF1212FB78B0062E35B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,9 +370,10 @@
 				124F1D24212FBEC00062E35B /* Configuration.swift in Sources */,
 				128FF8FD212FD4F600CA3469 /* WeatherStyleKit.swift in Sources */,
 				124F1D2A212FC2B60062E35B /* PostLaunchViewController.swift in Sources */,
-				70DF7F98213229C70066ABFC /* HudViewViewController.swift in Sources */,
-				124F1CEE212FB78B0062E35B /* ViewController.swift in Sources */,
+				70DF7F98213229C70066ABFC /* HudViewController.swift in Sources */,
+				124F1CEE212FB78B0062E35B /* SadViewController.swift in Sources */,
 				124F1CEC212FB78B0062E35B /* AppDelegate.swift in Sources */,
+				128DD80E21335F2E0080CB65 /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

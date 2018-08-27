@@ -2126,23 +2126,38 @@ public class WeatherStyleKit : NSObject {
         //// Color Declarations
         let white = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
         let transparentWhite = white.withAlphaComponent(0)
+        let fill = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
+        let transparentFill = fill.withAlphaComponent(0)
 
         //// Gradient Declarations
         let horizonGradient = CGGradient(colorsSpace: nil, colors: [white.cgColor, transparentWhite.cgColor] as CFArray, locations: [0, 1])!
+        let gradient = CGGradient(colorsSpace: nil, colors: [UIColor.black.cgColor, UIColor.black.blended(withFraction: 0.5, of: UIColor.black).cgColor, UIColor.black.cgColor, UIColor.black.blended(withFraction: 0.5, of: transparentFill).cgColor, transparentFill.cgColor] as CFArray, locations: [0, 0.18, 0.42, 0.47, 0.5])!
 
 
         //// Subframes
-        let group3: CGRect = CGRect(x: frame.minX, y: frame.minY + 75, width: fastFloor((frame.width) * 1.00000 + 0.5), height: fastFloor((frame.height - 75) * 0.34667 + 0.5))
+        let group3: CGRect = CGRect(x: frame.minX, y: frame.minY, width: fastFloor((frame.width) * 1.00000 + 0.5), height: fastFloor((frame.height) * 1.00000 + 0.5))
 
 
         //// Group 3
+        //// backgroundFill Drawing
+        let backgroundFillRect = CGRect(x: group3.minX + fastFloor(group3.width * 0.00000 + 0.5), y: group3.minY + fastFloor(group3.height * 0.00000 + 0.5), width: fastFloor(group3.width * 1.00000 + 0.5) - fastFloor(group3.width * 0.00000 + 0.5), height: fastFloor(group3.height * 1.00000 + 0.5) - fastFloor(group3.height * 0.00000 + 0.5))
+        let backgroundFillPath = UIBezierPath(rect: backgroundFillRect)
+        context.saveGState()
+        backgroundFillPath.addClip()
+        context.drawLinearGradient(gradient,
+            start: CGPoint(x: backgroundFillRect.midX, y: backgroundFillRect.maxY),
+            end: CGPoint(x: backgroundFillRect.midX, y: backgroundFillRect.minY),
+            options: [])
+        context.restoreGState()
+
+
         //// RightSide
         context.saveGState()
         context.beginTransparencyLayer(auxiliaryInfo: nil)
 
 
         //// RightComposite Drawing
-        let rightCompositeRect = CGRect(x: group3.minX + fastFloor(group3.width * 0.75000 + 0.5), y: group3.minY + fastFloor(group3.height * 0.89744 + 0.5), width: fastFloor(group3.width * 1.00000 + 0.5) - fastFloor(group3.width * 0.75000 + 0.5), height: fastFloor(group3.height * 1.00000 + 0.5) - fastFloor(group3.height * 0.89744 + 0.5))
+        let rightCompositeRect = CGRect(x: group3.minX + fastFloor(group3.width * 0.75000 + 0.5), y: group3.minY + fastFloor(group3.height * 0.48333 + 0.5), width: fastFloor(group3.width * 1.00000 + 0.5) - fastFloor(group3.width * 0.75000 + 0.5), height: fastFloor(group3.height * 0.51000 + 0.5) - fastFloor(group3.height * 0.48333 + 0.5))
         let rightCompositePath = UIBezierPath(rect: rightCompositeRect)
         context.saveGState()
         rightCompositePath.addClip()
@@ -2159,8 +2174,8 @@ public class WeatherStyleKit : NSObject {
         context.beginTransparencyLayer(auxiliaryInfo: nil)
 
         let rightLinePath = UIBezierPath()
-        rightLinePath.move(to: CGPoint(x: group3.minX + 0.75000 * group3.width, y: group3.minY + 0.95513 * group3.height))
-        rightLinePath.addLine(to: CGPoint(x: group3.minX + 1.00000 * group3.width, y: group3.minY + 0.94872 * group3.height))
+        rightLinePath.move(to: CGPoint(x: group3.minX + 0.75000 * group3.width, y: group3.minY + 0.49833 * group3.height))
+        rightLinePath.addLine(to: CGPoint(x: group3.minX + 1.00000 * group3.width, y: group3.minY + 0.49667 * group3.height))
         UIColor.gray.setStroke()
         rightLinePath.lineWidth = 1
         rightLinePath.stroke()
@@ -2179,7 +2194,7 @@ public class WeatherStyleKit : NSObject {
 
 
         //// LeftComposite Drawing
-        let leftCompositeRect = CGRect(x: group3.minX + fastFloor(group3.width * 0.00000 + 0.5), y: group3.minY + fastFloor(group3.height * 0.89744 + 0.5), width: fastFloor(group3.width * 0.25000 + 0.5) - fastFloor(group3.width * 0.00000 + 0.5), height: fastFloor(group3.height * 1.00000 + 0.5) - fastFloor(group3.height * 0.89744 + 0.5))
+        let leftCompositeRect = CGRect(x: group3.minX + fastFloor(group3.width * 0.00000 + 0.5), y: group3.minY + fastFloor(group3.height * 0.48333 + 0.5), width: fastFloor(group3.width * 0.25000 + 0.5) - fastFloor(group3.width * 0.00000 + 0.5), height: fastFloor(group3.height * 0.51000 + 0.5) - fastFloor(group3.height * 0.48333 + 0.5))
         let leftCompositePath = UIBezierPath(rect: leftCompositeRect)
         context.saveGState()
         leftCompositePath.addClip()
@@ -2196,8 +2211,8 @@ public class WeatherStyleKit : NSObject {
         context.beginTransparencyLayer(auxiliaryInfo: nil)
 
         let leftLinePath = UIBezierPath()
-        leftLinePath.move(to: CGPoint(x: group3.minX + 0.00000 * group3.width, y: group3.minY + 0.96154 * group3.height))
-        leftLinePath.addLine(to: CGPoint(x: group3.minX + 0.25000 * group3.width, y: group3.minY + 0.95513 * group3.height))
+        leftLinePath.move(to: CGPoint(x: group3.minX + 0.00000 * group3.width, y: group3.minY + 0.50000 * group3.height))
+        leftLinePath.addLine(to: CGPoint(x: group3.minX + 0.25000 * group3.width, y: group3.minY + 0.49833 * group3.height))
         UIColor.gray.setStroke()
         leftLinePath.lineWidth = 1
         leftLinePath.stroke()
@@ -2212,10 +2227,10 @@ public class WeatherStyleKit : NSObject {
 
         //// Bezier 2 Drawing
         let bezier2Path = UIBezierPath()
-        bezier2Path.move(to: CGPoint(x: group3.minX + 0.25000 * group3.width, y: group3.minY + 0.96154 * group3.height))
-        bezier2Path.addCurve(to: CGPoint(x: group3.minX + 0.40218 * group3.width, y: group3.minY + 0.07639 * group3.height), controlPoint1: CGPoint(x: group3.minX + 0.25000 * group3.width, y: group3.minY + 0.56401 * group3.height), controlPoint2: CGPoint(x: group3.minX + 0.31272 * group3.width, y: group3.minY + 0.22282 * group3.height))
-        bezier2Path.addCurve(to: CGPoint(x: group3.minX + 0.50000 * group3.width, y: group3.minY + 0.00000 * group3.height), controlPoint1: CGPoint(x: group3.minX + 0.43223 * group3.width, y: group3.minY + 0.02721 * group3.height), controlPoint2: CGPoint(x: group3.minX + 0.46529 * group3.width, y: group3.minY + 0.00000 * group3.height))
-        bezier2Path.addCurve(to: CGPoint(x: group3.minX + 0.75000 * group3.width, y: group3.minY + 0.96154 * group3.height), controlPoint1: CGPoint(x: group3.minX + 0.63807 * group3.width, y: group3.minY + 0.00000 * group3.height), controlPoint2: CGPoint(x: group3.minX + 0.75000 * group3.width, y: group3.minY + 0.43050 * group3.height))
+        bezier2Path.move(to: CGPoint(x: group3.minX + 0.25000 * group3.width, y: group3.minY + 0.50000 * group3.height))
+        bezier2Path.addCurve(to: CGPoint(x: group3.minX + 0.40218 * group3.width, y: group3.minY + 0.26986 * group3.height), controlPoint1: CGPoint(x: group3.minX + 0.25000 * group3.width, y: group3.minY + 0.39664 * group3.height), controlPoint2: CGPoint(x: group3.minX + 0.31272 * group3.width, y: group3.minY + 0.30793 * group3.height))
+        bezier2Path.addCurve(to: CGPoint(x: group3.minX + 0.50000 * group3.width, y: group3.minY + 0.25000 * group3.height), controlPoint1: CGPoint(x: group3.minX + 0.43223 * group3.width, y: group3.minY + 0.25707 * group3.height), controlPoint2: CGPoint(x: group3.minX + 0.46529 * group3.width, y: group3.minY + 0.25000 * group3.height))
+        bezier2Path.addCurve(to: CGPoint(x: group3.minX + 0.75000 * group3.width, y: group3.minY + 0.50000 * group3.height), controlPoint1: CGPoint(x: group3.minX + 0.63807 * group3.width, y: group3.minY + 0.25000 * group3.height), controlPoint2: CGPoint(x: group3.minX + 0.75000 * group3.width, y: group3.minY + 0.36193 * group3.height))
         white.setStroke()
         bezier2Path.lineWidth = 1
         bezier2Path.stroke()
@@ -2737,5 +2752,22 @@ public class WeatherStyleKit : NSObject {
             result.origin.y = target.minY + (target.height - result.height) / 2
             return result
         }
+    }
+}
+
+
+
+private extension UIColor {
+    func blended(withFraction fraction: CGFloat, of color: UIColor) -> UIColor {
+        var r1: CGFloat = 1, g1: CGFloat = 1, b1: CGFloat = 1, a1: CGFloat = 1
+        var r2: CGFloat = 1, g2: CGFloat = 1, b2: CGFloat = 1, a2: CGFloat = 1
+
+        self.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
+        color.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
+
+        return UIColor(red: r1 * (1 - fraction) + r2 * fraction,
+            green: g1 * (1 - fraction) + g2 * fraction,
+            blue: b1 * (1 - fraction) + b2 * fraction,
+            alpha: a1 * (1 - fraction) + a2 * fraction);
     }
 }

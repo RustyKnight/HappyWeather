@@ -118,7 +118,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="nfB-7n-oAm" secondAttribute="bottom" id="BlX-BG-ebe"/>
                                     <constraint firstItem="nfB-7n-oAm" firstAttribute="top" secondItem="Fbv-gk-5DS" secondAttribute="top" id="Bud-BW-FIx"/>

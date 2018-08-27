@@ -13,7 +13,7 @@ import AnimatorKit
 
 struct Track {
 	let frame: CGRect
-
+	
 	init(frame: CGRect) {
 		self.frame = frame
 	}
@@ -21,7 +21,7 @@ struct Track {
 	init(x: CGFloat, y: CGFloat, radius: CGFloat) {
 		self.init(frame: CGRect(x: x, y: y, width: radius * 2, height: radius * 2))
 	}
-
+	
 	init(origin: CGPoint, size: CGSize) {
 		self.init(frame: CGRect(origin: origin, size: size))
 	}
@@ -29,22 +29,22 @@ struct Track {
 	init(radius: CGFloat, in area: CGFloat) {
 		self.init(x: (area / 2) - radius, y: (area / 2) - radius, radius: radius)
 	}
-
+	
 	func pointAt(degrees: Double) -> CGPoint {
 		return pointAt(degrees: CGFloat(degrees))
 	}
-
+	
 	func pointAt(degrees: CGFloat) -> CGPoint {
 		let rads = Measurement(value: Double(degrees), unit: UnitAngle.degrees).converted(to: UnitAngle.radians).value
 		return pointAt(radians: CGFloat(rads))
 	}
-
+	
 	func pointAt(radians: CGFloat) -> CGPoint {
 		let radius = min(frame.size.width, frame.size.height) / 2
 		
 		let originX = frame.origin.x + radius
 		let originY = frame.origin.y + radius
-
+		
 		let x = originX + (radius * cos(radians))
 		let y = originY + (radius * sin(radians))
 		
@@ -69,7 +69,7 @@ class HudViewController: UIViewController {
 	let safeTrackLayer: CAShapeLayer = CAShapeLayer()
 	let middleTrackLayer: CAShapeLayer = CAShapeLayer()
 	let innerTrackLayer: CAShapeLayer = CAShapeLayer()
-
+	
 	var timeFormatter: DateFormatter = {
 		let formatter = DateFormatter()
 		formatter.dateFormat = "hh:mm a"
@@ -82,24 +82,32 @@ class HudViewController: UIViewController {
 	let innerTrack: Track = Track(radius: 75, in: 300)
 	
 	var sun: UIImageView!
-	var weather: UIImageView!
+	var weatherView: UIImageView!
 	
-	var animator: DurationAnimator = DurationAnimator(duration: 60.0)
-
+	var sunAnimator: DurationAnimator!
+	var weatherAnimator: DurationAnimator!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		animator.delegate = self
-		
 		sun = UIImageView(image: WeatherStyleKit.imageOfWeatherSunny())
 		sun.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
 		sun.contentMode = .scaleAspectFit
 		
-		weather = UIImageView(image: WeatherStyleKit.imageOfWeatherTornado)
-		weather.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-		weather.contentMode = .scaleAspectFit
-
-		backgroundView.addSubview(sun)
+		weatherView = UIImageView(image: WeatherStyleKit.imageOfWeatherTornado)
+		weatherView.frame = CGRect(x: 0, y: 0, width: 37.5, height: 37.5)
+		weatherView.contentMode = .scaleAspectFit
+		
+		sunAnimator = DurationAnimator(duration: 60.0) { (animator, progress, completed) in
+			self.sun.center = self.point(on: self.safeTrack, at: progress)
+		}
+		weatherAnimator = DurationAnimator(duration: 120.0) { (animator, progress, completed) in
+			self.weatherView.center = self.point(on: self.middleTrack, at: progress, offset: 0)
+		}
+		sunAnimator.repeats = true
+		weatherAnimator.repeats = true
+		
+		backgroundView.insertSubview(sun, at: 0)
+		backgroundView.insertSubview(weatherView, at: 1)
 		
 		hudImageView.image = WeatherStyleKit.imageOfHorizonHud()
 		
@@ -112,11 +120,21 @@ class HudViewController: UIViewController {
 		configure(layer: safeTrackLayer, with: safeTrack, outline: UIColor.green)
 		configure(layer: middleTrackLayer, with: middleTrack, outline: UIColor.blue)
 		configure(layer: innerTrackLayer, with: innerTrack, outline: UIColor.yellow)
+//
+//		let gradientLayer = CAGradientLayer()
+//		gradientLayer.frame = backgroundView.bounds
+//		gradientLayer.colors = [UIColor.red.cgColor, UIColor.red.cgColor, UIColor.clear.cgColor]
+//		gradientLayer.locations = [0.0, 0.5, 0.55]
+//		gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+//		gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+//		backgroundView.layer.mask = gradientLayer
 
-		backgroundView.layer.addSublayer(outerTrackLayer)
-		backgroundView.layer.addSublayer(middleTrackLayer)
-		backgroundView.layer.addSublayer(innerTrackLayer)
-		backgroundView.layer.addSublayer(safeTrackLayer)
+//		backgroundView.layer.addSublayer(gradientLayer)
+
+//		backgroundView.layer.addSublayer(outerTrackLayer)
+//		backgroundView.layer.addSublayer(middleTrackLayer)
+//		backgroundView.layer.addSublayer(innerTrackLayer)
+//		backgroundView.layer.addSublayer(safeTrackLayer)
 	}
 	
 	func configure(layer: CAShapeLayer, with track: Track, outline color: UIColor) {
@@ -131,14 +149,15 @@ class HudViewController: UIViewController {
 		updateTime()
 		clock.start()
 		
-		updateSun(at: 0)
-		animator.start()
+		sunAnimator.start()
+		weatherAnimator.start()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		clock.stop()
-		animator.stop()
+		sunAnimator.stop()
+		weatherAnimator.stop()
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -157,12 +176,11 @@ class HudViewController: UIViewController {
 		log(debug: "\(db.debugDescription)")
 	}
 	
-	func updateSun(at progress: Double) {
-		let angle = (360.0 * -progress) + 90
-		let point = safeTrack.pointAt(degrees: angle)
-		sun.center = point
+	func point(on track: Track, at progress: Double, offset: Double = 90) -> CGPoint {
+		let angle = (360.0 * -progress) + offset
+		return track.pointAt(degrees: angle)
 	}
-
+	
 }
 
 extension DataPoint: CustomStringConvertible {
@@ -202,28 +220,10 @@ extension DataPoint: CustomStringConvertible {
 		properties["uvIndexTime"] = uvIndexTime?.description ?? "nil"
 		
 		return "DataPoint: \n\t" + properties.sorted { (lhs, rhs) -> Bool in
-				return lhs.key < rhs.key
+			return lhs.key < rhs.key
 			}.map { (entry) -> String in
 				return "\(entry.key) = \(entry.value)"
 			}.joined(separator: "\n\t")
 	}
-
-}
-
-extension HudViewController: DurationAnimatorDelegate {
-	
-	func didTick(animation: DurationAnimator, progress: Double) {
-		updateSun(at: progress)
-		backgroundView.setNeedsLayout()
-		backgroundView.setNeedsDisplay()
-	}
-	
-	func didComplete(animation: DurationAnimator, completed: Bool) {
-		guard completed else {
-			return
-		}
-		animation.start()
-	}
-	
 	
 }

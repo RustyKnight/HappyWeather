@@ -22,6 +22,10 @@
 		124F1D2A212FC2B60062E35B /* PostLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124F1D29212FC2B60062E35B /* PostLaunchViewController.swift */; };
 		128DD80E21335F2E0080CB65 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128DD80D21335F2E0080CB65 /* Weather.swift */; };
 		128DD811213364730080CB65 /* Config.txt in Resources */ = {isa = PBXBuildFile; fileRef = 128DD810213364730080CB65 /* Config.txt */; };
+		128DD8132133665A0080CB65 /* LogWrapperKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 128DD8122133665A0080CB65 /* LogWrapperKit.framework */; };
+		128DD8142133665A0080CB65 /* LogWrapperKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 128DD8122133665A0080CB65 /* LogWrapperKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		128DD817213367170080CB65 /* String+Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128DD816213367170080CB65 /* String+Trim.swift */; };
+		128DD819213371410080CB65 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128DD818213371410080CB65 /* Clock.swift */; };
 		128FF8F9212FD1B000CA3469 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 128FF8F8212FD1B000CA3469 /* Assets.xcassets */; };
 		128FF8FD212FD4F600CA3469 /* WeatherStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128FF8FC212FD4F600CA3469 /* WeatherStyleKit.swift */; };
 		12AB0F44212FDADD003D0C39 /* AnimatorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */; };
@@ -55,6 +59,7 @@
 			files = (
 				12AB0F45212FDADD003D0C39 /* AnimatorKit.framework in Embed Frameworks */,
 				124F1D1B212FBD090062E35B /* ForecastIO.framework in Embed Frameworks */,
+				128DD8142133665A0080CB65 /* LogWrapperKit.framework in Embed Frameworks */,
 				124F1D28212FC0410062E35B /* Hydra.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -82,6 +87,9 @@
 		124F1D29212FC2B60062E35B /* PostLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLaunchViewController.swift; sourceTree = "<group>"; };
 		128DD80D21335F2E0080CB65 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		128DD810213364730080CB65 /* Config.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Config.txt; sourceTree = "<group>"; };
+		128DD8122133665A0080CB65 /* LogWrapperKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LogWrapperKit.framework; path = Carthage/Build/iOS/LogWrapperKit.framework; sourceTree = "<group>"; };
+		128DD816213367170080CB65 /* String+Trim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Trim.swift"; sourceTree = "<group>"; };
+		128DD818213371410080CB65 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		128FF8F8212FD1B000CA3469 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		128FF8FC212FD4F600CA3469 /* WeatherStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherStyleKit.swift; sourceTree = "<group>"; };
 		12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AnimatorKit.framework; path = Carthage/Build/iOS/AnimatorKit.framework; sourceTree = "<group>"; };
@@ -95,6 +103,7 @@
 			files = (
 				12AB0F44212FDADD003D0C39 /* AnimatorKit.framework in Frameworks */,
 				124F1D1A212FBD090062E35B /* ForecastIO.framework in Frameworks */,
+				128DD8132133665A0080CB65 /* LogWrapperKit.framework in Frameworks */,
 				124F1D27212FC0410062E35B /* Hydra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,6 +128,7 @@
 		124F1CDF212FB78B0062E35B = {
 			isa = PBXGroup;
 			children = (
+				128DD8122133665A0080CB65 /* LogWrapperKit.framework */,
 				12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */,
 				124F1D1D212FBDEF0062E35B /* DarkSky.json */,
 				124F1CEA212FB78B0062E35B /* DarkSkyTest */,
@@ -143,6 +153,7 @@
 		124F1CEA212FB78B0062E35B /* DarkSkyTest */ = {
 			isa = PBXGroup;
 			children = (
+				128DD815213367030080CB65 /* Extensions */,
 				128DD80F2133645A0080CB65 /* Configuration */,
 				128DD80C21335F1A0080CB65 /* Models */,
 				128FF8F3212FCD0F00CA3469 /* StyleKit */,
@@ -184,9 +195,9 @@
 		124F1D20212FBE820062E35B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				124F1CED212FB78B0062E35B /* SadViewController.swift */,
-				124F1D29212FC2B60062E35B /* PostLaunchViewController.swift */,
 				70DF7F97213229C70066ABFC /* HudViewController.swift */,
+				124F1D29212FC2B60062E35B /* PostLaunchViewController.swift */,
+				124F1CED212FB78B0062E35B /* SadViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -205,6 +216,7 @@
 			children = (
 				124F1CEB212FB78B0062E35B /* AppDelegate.swift */,
 				124F1D23212FBEC00062E35B /* Configuration.swift */,
+				128DD818213371410080CB65 /* Clock.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -223,6 +235,14 @@
 				128DD810213364730080CB65 /* Config.txt */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		128DD815213367030080CB65 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				128DD816213367170080CB65 /* String+Trim.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		128FF8F3212FCD0F00CA3469 /* StyleKit */ = {
@@ -370,10 +390,12 @@
 				124F1D24212FBEC00062E35B /* Configuration.swift in Sources */,
 				128FF8FD212FD4F600CA3469 /* WeatherStyleKit.swift in Sources */,
 				124F1D2A212FC2B60062E35B /* PostLaunchViewController.swift in Sources */,
+				128DD819213371410080CB65 /* Clock.swift in Sources */,
 				70DF7F98213229C70066ABFC /* HudViewController.swift in Sources */,
 				124F1CEE212FB78B0062E35B /* SadViewController.swift in Sources */,
 				124F1CEC212FB78B0062E35B /* AppDelegate.swift in Sources */,
 				128DD80E21335F2E0080CB65 /* Weather.swift in Sources */,
+				128DD817213367170080CB65 /* String+Trim.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

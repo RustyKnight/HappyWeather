@@ -7,8 +7,20 @@
 //
 
 import Foundation
+import LogWrapperKit
 
 struct Configuration {
 	// Should probably be a file or something, but guess what, I'm lazy
-	static let apiKey = "fixme"
+	static var apiKey: String = {
+		if let filepath = Bundle.main.path(forResource: "Config", ofType: "txt") {
+			do {
+				let contents = try String(contentsOfFile: filepath).trimmed
+				log(debug: "APIKey = \(contents)")
+				return contents
+			} catch let error {
+				log(error: "Could not load configuration file - did you forget to create it? - \(error)")
+			}
+		}
+		return ""
+	}()
 }

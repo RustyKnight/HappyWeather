@@ -73,7 +73,7 @@ class PostLaunchViewController: UIViewController {
 		}
 		
 		forecast.language = .english
-		//forecast.units = .si
+		forecast.units = .uk
 		forecast.getForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { (result) in
 			switch result {
 			case .success(let currentForecast, let metaData):

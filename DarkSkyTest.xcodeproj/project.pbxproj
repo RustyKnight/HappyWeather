@@ -100,6 +100,7 @@
 		12B776F82134BAF200D3B82A /* Date+Mutate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Mutate.swift"; sourceTree = "<group>"; };
 		12B776FA2134CB3600D3B82A /* DataPoint+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataPoint+Hashable.swift"; sourceTree = "<group>"; };
 		12B776FD2134FC1300D3B82A /* Icon+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icon+Image.swift"; sourceTree = "<group>"; };
+		12B776FF21350BD200D3B82A /* BDAstroCalc.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = BDAstroCalc.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		70DF7F97213229C70066ABFC /* HudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +139,7 @@
 				128DD8122133665A0080CB65 /* LogWrapperKit.framework */,
 				12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */,
 				12B776F72134B61B00D3B82A /* MyPlayground.playground */,
+				12B776FF21350BD200D3B82A /* BDAstroCalc.playground */,
 				124F1D1D212FBDEF0062E35B /* DarkSky.json */,
 				124F1CEA212FB78B0062E35B /* DarkSkyTest */,
 				124F1CFF212FB78C0062E35B /* DarkSkyTestTests */,

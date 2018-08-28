@@ -48,7 +48,7 @@
                         <outlet property="imageView" destination="x95-Ha-q1r" id="Th5-SG-F61"/>
                         <outlet property="statusLabel" destination="XPD-og-1KN" id="VM2-3f-ZLB"/>
                         <segue destination="3mc-gc-f0W" kind="show" identifier="sad" id="Led-hi-6wP"/>
-                        <segue destination="bTS-hn-otr" kind="show" identifier="happy" id="Hv2-Jf-CCd"/>
+                        <segue destination="bTS-hn-otr" kind="show" identifier="happy" id="hm0-1D-JsJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbR-oP-F4t" userLabel="First Responder" sceneMemberID="firstResponder"/>

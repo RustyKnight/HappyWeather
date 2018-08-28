@@ -106,8 +106,9 @@ class WeatherService {
 		guard let hourly = json["hourly"] as? NSMutableDictionary, let data = hourly["data"] as? NSArray else {
 			fatalError("Could not modify hourly time")
 		}
-		var time = startTime.startOfHour
-		log(debug: "Starting at \(time)")
+		var time = startTime.byAdding(days: -1).startOfDay
+		log(debug: "startTime \(startTime)")
+		log(debug: "Starting of day \(time)")
 		for element in data {
 			guard let hourData = element as? NSMutableDictionary else {
 				fatalError("Could not modify minute time")
@@ -175,8 +176,10 @@ class WeatherService {
 		var events: [DataPoint] = []
 		for event in block.data {
 			guard event.time >= startDate && event.time <= endDate else {
+//				log(debug: "Exclude \(event.time)")
 				continue
 			}
+//			log(debug: "Include \(event.time)")
 			events.append(event)
 		}
 		

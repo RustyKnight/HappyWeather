@@ -86,6 +86,7 @@ class HudViewController: UIViewController {
 	let weatherIconSize = CGSize(width: 20, height: 20)
 	
 	override func viewDidLoad() {
+		log(debug: "")
 		super.viewDidLoad()
 //		sun = UIImageView(image: WeatherStyleKit.imageOfWeatherSunny())
 //		sun.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
@@ -121,6 +122,7 @@ class HudViewController: UIViewController {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
+		log(debug: "")
 		super.viewWillAppear(animated)
 		updateTime()
 		updateEvents()
@@ -129,12 +131,9 @@ class HudViewController: UIViewController {
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
+		log(debug: "")
 		super.viewDidDisappear(animated)
 		clock.stop()
-	}
-	
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
 	}
 	
 	func updateTime() {
@@ -164,9 +163,10 @@ class HudViewController: UIViewController {
 		
 		let toAdd = events.filter( { !remaining.contains($0)} )
 		for event in toAdd {
+			let nextIcon = event.icon
 			let view = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: weatherIconSize))
 			view.contentMode = .scaleAspectFit
-			view.image = event.icon?.image
+			view.image = nextIcon?.image
 			weatherEvents[event] = view
 			log(debug: "Add new view")
 			backgroundView.insertSubview(view, at: 0)
@@ -186,14 +186,29 @@ class HudViewController: UIViewController {
 			return lhs.time < rhs.time
 		}
 		
+		var lastIcon: Icon? = nil
+
+		// Also need to take into consideration if the event
+		// is within 25-75% range, this could override the display of the
+		// icon
 		for key in keys {
 			let view = weatherEvents[key]
 			let progress = key.time.timeIntervalSince(startTime) / range
-			log(debug: "event \(key.time) @ \(progress)")
-			if progress > 1.0 {
+			guard progress > 0.0 else {
 				// No longer valid
+				log(debug: "\(key.time) @ \(progress) is past time")
 				view?.removeFromSuperview()
-			} else if progress < 0.0 {
+				weatherEvents[key] = nil
+				continue
+			}
+			let nextIcon = key.icon
+			guard lastIcon != nextIcon else {
+				view?.isHidden = true
+				continue
+			}
+			lastIcon = nextIcon
+			if progress < 0.0 {
+			} else if progress > 1.0 {
 				// It's coming, but we don't need to display it
 				view?.isHidden = true
 			} else {

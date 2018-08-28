@@ -10,9 +10,20 @@ extension Date {
 		}
 	}
 	
+	var startOfDay: Date {
+		get {
+			return with(.hour, setTo: 0)
+				.with(.second, setTo:	0)
+				.with(.minute, setTo: 0)
+				.with(.nanosecond, setTo: 0)
+		}
+	}
+	
 	var startOfHour: Date {
 		get {
-			return with(.second, setTo:	0).with(.minute, setTo: 0).with(.nanosecond, setTo: 0)
+			return with(.second, setTo:	0)
+				.with(.minute, setTo: 0)
+				.with(.nanosecond, setTo: 0)
 		}
 	}
 	
@@ -53,14 +64,4 @@ extension Date {
 }
 
 let now = Date()
-let startTime = now.byAdding(hours: -12)
-let endTime = now.byAdding(hours: 12)
-
-let before = now.byAdding(minutes: 5)
-let after = now.byAdding(minutes: -5)
-
-let range = endTime.timeIntervalSince(startTime)
-
-let nowPoint = now.timeIntervalSince(startTime) / range
-let beforePoint = before.timeIntervalSince(startTime) / range
-let afterPoint = after.timeIntervalSince(startTime) / range
+now.startOfDay

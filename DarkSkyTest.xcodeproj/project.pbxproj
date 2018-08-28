@@ -20,7 +20,6 @@
 		124F1D27212FC0410062E35B /* Hydra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124F1D26212FC0410062E35B /* Hydra.framework */; };
 		124F1D28212FC0410062E35B /* Hydra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 124F1D26212FC0410062E35B /* Hydra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		124F1D2A212FC2B60062E35B /* PostLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124F1D29212FC2B60062E35B /* PostLaunchViewController.swift */; };
-		128DD811213364730080CB65 /* Config.txt in Resources */ = {isa = PBXBuildFile; fileRef = 128DD810213364730080CB65 /* Config.txt */; };
 		128DD8132133665A0080CB65 /* LogWrapperKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 128DD8122133665A0080CB65 /* LogWrapperKit.framework */; };
 		128DD8142133665A0080CB65 /* LogWrapperKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 128DD8122133665A0080CB65 /* LogWrapperKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		128DD817213367170080CB65 /* String+Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128DD816213367170080CB65 /* String+Trim.swift */; };
@@ -33,6 +32,7 @@
 		12B776F92134BAF200D3B82A /* Date+Mutate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B776F82134BAF200D3B82A /* Date+Mutate.swift */; };
 		12B776FB2134CB3600D3B82A /* DataPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B776FA2134CB3600D3B82A /* DataPoint+Hashable.swift */; };
 		12B776FE2134FC1300D3B82A /* Icon+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B776FD2134FC1300D3B82A /* Icon+Image.swift */; };
+		703388DC21353657000BAE98 /* Config.txt in Resources */ = {isa = PBXBuildFile; fileRef = 703388DB21353657000BAE98 /* Config.txt */; };
 		70DF7F98213229C70066ABFC /* HudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF7F97213229C70066ABFC /* HudViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,7 +88,6 @@
 		124F1D23212FBEC00062E35B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		124F1D26212FC0410062E35B /* Hydra.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hydra.framework; path = Carthage/Build/iOS/Hydra.framework; sourceTree = "<group>"; };
 		124F1D29212FC2B60062E35B /* PostLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLaunchViewController.swift; sourceTree = "<group>"; };
-		128DD810213364730080CB65 /* Config.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Config.txt; sourceTree = "<group>"; };
 		128DD8122133665A0080CB65 /* LogWrapperKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LogWrapperKit.framework; path = Carthage/Build/iOS/LogWrapperKit.framework; sourceTree = "<group>"; };
 		128DD816213367170080CB65 /* String+Trim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Trim.swift"; sourceTree = "<group>"; };
 		128DD818213371410080CB65 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
@@ -101,6 +100,8 @@
 		12B776FA2134CB3600D3B82A /* DataPoint+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataPoint+Hashable.swift"; sourceTree = "<group>"; };
 		12B776FD2134FC1300D3B82A /* Icon+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icon+Image.swift"; sourceTree = "<group>"; };
 		12B776FF21350BD200D3B82A /* BDAstroCalc.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = BDAstroCalc.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		703388DB21353657000BAE98 /* Config.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Config.txt; sourceTree = "<group>"; };
+		703388DD213539A8000BAE98 /* SunCalc.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SunCalc.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		70DF7F97213229C70066ABFC /* HudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +137,7 @@
 		124F1CDF212FB78B0062E35B = {
 			isa = PBXGroup;
 			children = (
+				703388DD213539A8000BAE98 /* SunCalc.playground */,
 				128DD8122133665A0080CB65 /* LogWrapperKit.framework */,
 				12AB0F43212FDADD003D0C39 /* AnimatorKit.framework */,
 				12B776F72134B61B00D3B82A /* MyPlayground.playground */,
@@ -234,7 +236,7 @@
 		128DD80F2133645A0080CB65 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				128DD810213364730080CB65 /* Config.txt */,
+				703388DB21353657000BAE98 /* Config.txt */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -374,7 +376,7 @@
 				124F1CF6212FB78C0062E35B /* LaunchScreen.storyboard in Resources */,
 				124F1D1E212FBDEF0062E35B /* DarkSky.json in Resources */,
 				128FF8F9212FD1B000CA3469 /* Assets.xcassets in Resources */,
-				128DD811213364730080CB65 /* Config.txt in Resources */,
+				703388DC21353657000BAE98 /* Config.txt in Resources */,
 				124F1CF1212FB78B0062E35B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

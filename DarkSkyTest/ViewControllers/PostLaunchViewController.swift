@@ -11,6 +11,7 @@ import Hydra
 import CoreLocation
 import AnimatorKit
 import ForecastIO
+import LogWrapperKit
 
 class PostLaunchViewController: UIViewController {
 
@@ -63,17 +64,28 @@ class PostLaunchViewController: UIViewController {
 		manager.startUpdatingLocation()
 	}
 	
+	var loading = false
+	
 	func found(location: CLLocation) {
 		manager.stopUpdatingLocation()
+		guard !loading else {
+			return
+		}
+		loading = true
 		userLocation = location
 		UIView.animate(withDuration: 1.0) {
 			self.statusLabel.text = "Looking out the window..."
 		}
 		WeatherService.shared.getForecast(at: location.coordinate, then: { (forecast) in
-			self.performSegue(withIdentifier: "happy", sender: self)
+			log(debug: "Show results")
+			DispatchQueue.main.async {
+				self.performSegue(withIdentifier: "happy", sender: self)
+			}
 		}) { (error) in
 			self.error = error
-			self.performSegue(withIdentifier: "sad", sender: self)
+			DispatchQueue.main.async {
+				self.performSegue(withIdentifier: "sad", sender: self)
+			}
 		}
 	}
 	

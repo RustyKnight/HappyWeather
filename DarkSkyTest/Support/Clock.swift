@@ -26,11 +26,9 @@ class Clock {
 	// timer
 	private var nextInterval: TimeInterval {
 		let now = Date()
-		guard let then = Date().addingTimeInterval(60.0).withZeroSeconds else {
-			fatalError("Could not determine next interval")
-		}
+		let then = Date().addingTimeInterval(60.0).withZeroSeconds
 		let delay = then.timeIntervalSince(now)
-		log(debug: "delay = \(delay)")
+		//log(debug: "delay = \(delay)")
 		return delay
 	}
 	
@@ -58,18 +56,6 @@ class Clock {
 		}
 		timer.invalidate()
 		self.timer = nil
-	}
-	
-}
-
-extension Date {
-	
-	var withZeroSeconds: Date? {
-		get {
-			let calender = Calendar.current
-			let dateComponents = calender.dateComponents([.year, .month, .day, .hour, .minute], from: self)
-			return calender.date(from: dateComponents)
-		}
 	}
 	
 }

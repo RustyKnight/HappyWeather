@@ -62,13 +62,12 @@ class HudViewController: UIViewController {
 	@IBOutlet weak var clockLabel: UILabel!
 	@IBOutlet weak var backgroundView: UIView!
 	
-	var weather: Weather?
 	var clock: Clock!
 	
-	let outerTrackLayer: CAShapeLayer = CAShapeLayer()
-	let safeTrackLayer: CAShapeLayer = CAShapeLayer()
-	let middleTrackLayer: CAShapeLayer = CAShapeLayer()
-	let innerTrackLayer: CAShapeLayer = CAShapeLayer()
+//	let outerTrackLayer: CAShapeLayer = CAShapeLayer()
+	let orbitTrackLayer: CAShapeLayer = CAShapeLayer()
+	let weatherTrackLayer: CAShapeLayer = CAShapeLayer()
+//	let innerTrackLayer: CAShapeLayer = CAShapeLayer()
 	
 	var timeFormatter: DateFormatter = {
 		let formatter = DateFormatter()
@@ -76,65 +75,42 @@ class HudViewController: UIViewController {
 		return formatter
 	}()
 	
-	let outerTrack: Track = Track(radius: 150, in: 300)
-	let safeTrack: Track = Track(radius: 131.25, in: 300)
-	let middleTrack: Track = Track(radius: 103.125, in: 300)
-	let innerTrack: Track = Track(radius: 75, in: 300)
+	//let outerTrack: Track = Track(radius: 150, in: 300)
+	let orbitTrack: Track = Track(radius: 125, in: 300)
+	let weatherTrack: Track = Track(radius: 87.5, in: 300)
+	//let innerTrack: Track = Track(radius: 75, in: 300)
 	
-	var sun: UIImageView!
-	var weatherView: UIImageView!
+	var orbitEvents: [DataPoint: UIImageView] = [:]
+	var weatherEvents: [DataPoint: UIImageView] = [:]
 	
-	var sunAnimator: DurationAnimator!
-	var weatherAnimator: DurationAnimator!
+	let weatherIconSize = CGSize(width: 20, height: 20)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		sun = UIImageView(image: WeatherStyleKit.imageOfWeatherSunny())
-		sun.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-		sun.contentMode = .scaleAspectFit
-		
-		weatherView = UIImageView(image: WeatherStyleKit.imageOfWeatherTornado)
-		weatherView.frame = CGRect(x: 0, y: 0, width: 37.5, height: 37.5)
-		weatherView.contentMode = .scaleAspectFit
-		
-		sunAnimator = DurationAnimator(duration: 60.0) { (animator, progress, completed) in
-			self.sun.center = self.point(on: self.safeTrack, at: progress)
-		}
-		weatherAnimator = DurationAnimator(duration: 120.0) { (animator, progress, completed) in
-			self.weatherView.center = self.point(on: self.middleTrack, at: progress, offset: 0)
-		}
-		sunAnimator.repeats = true
-		weatherAnimator.repeats = true
-		
-		backgroundView.insertSubview(sun, at: 0)
-		backgroundView.insertSubview(weatherView, at: 1)
-		
+//		sun = UIImageView(image: WeatherStyleKit.imageOfWeatherSunny())
+//		sun.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+//		sun.contentMode = .scaleAspectFit
+//
+//		weatherView = UIImageView(image: WeatherStyleKit.imageOfWeatherTornado)
+//		weatherView.frame = CGRect(x: 0, y: 0, width: 37.5, height: 37.5)
+//		weatherView.contentMode = .scaleAspectFit
+//
+//		backgroundView.insertSubview(sun, at: 0)
+//		backgroundView.insertSubview(weatherView, at: 1)
+//
 		hudImageView.image = WeatherStyleKit.imageOfHorizonHud()
 		
 		clock = Clock(tick: {
-			log(debug: "Tick")
 			self.updateTime()
+			self.updateEvents()
+			self.updateReport()
 		})
 		
-		configure(layer: outerTrackLayer, with: outerTrack, outline: UIColor.red)
-		configure(layer: safeTrackLayer, with: safeTrack, outline: UIColor.green)
-		configure(layer: middleTrackLayer, with: middleTrack, outline: UIColor.blue)
-		configure(layer: innerTrackLayer, with: innerTrack, outline: UIColor.yellow)
-//
-//		let gradientLayer = CAGradientLayer()
-//		gradientLayer.frame = backgroundView.bounds
-//		gradientLayer.colors = [UIColor.red.cgColor, UIColor.red.cgColor, UIColor.clear.cgColor]
-//		gradientLayer.locations = [0.0, 0.5, 0.55]
-//		gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-//		gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-//		backgroundView.layer.mask = gradientLayer
+		configure(layer: orbitTrackLayer, with: orbitTrack, outline: UIColor.green)
+		configure(layer: weatherTrackLayer, with: weatherTrack, outline: UIColor.blue)
 
-//		backgroundView.layer.addSublayer(gradientLayer)
-
-//		backgroundView.layer.addSublayer(outerTrackLayer)
-//		backgroundView.layer.addSublayer(middleTrackLayer)
-//		backgroundView.layer.addSublayer(innerTrackLayer)
-//		backgroundView.layer.addSublayer(safeTrackLayer)
+		backgroundView.layer.addSublayer(weatherTrackLayer)
+		backgroundView.layer.addSublayer(orbitTrackLayer)
 	}
 	
 	func configure(layer: CAShapeLayer, with track: Track, outline color: UIColor) {
@@ -147,17 +123,14 @@ class HudViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		updateTime()
+		updateEvents()
+		updateReport()
 		clock.start()
-		
-		sunAnimator.start()
-		weatherAnimator.start()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		clock.stop()
-		sunAnimator.stop()
-		weatherAnimator.stop()
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -168,62 +141,66 @@ class HudViewController: UIViewController {
 		clockLabel.text = timeFormatter.string(from: Date())
 	}
 	
-	func dump(_ dp: DataPoint?) {
-		log(debug: "\(dp.debugDescription)")
-	}
-	
-	func dump(_ db: DataBlock?) {
-		log(debug: "\(db.debugDescription)")
-	}
-	
 	func point(on track: Track, at progress: Double, offset: Double = 90) -> CGPoint {
-		let angle = (360.0 * -progress) + offset
+		let angle = (360.0 * progress) + offset
 		return track.pointAt(degrees: angle)
 	}
 	
-}
-
-extension DataPoint: CustomStringConvertible {
-	public var description: String {
-		var properties: [String: String] = [:]
-		properties["time"] = time.description
-		properties["summary"] = summary ?? "nil"
-		properties["icon"] = icon?.rawValue ?? "nil"
-		properties["sunriseTime"] = sunriseTime?.description ?? "nil"
-		properties["sunsetTime"] = sunsetTime?.description ?? "nil"
-		properties["moonPhase"] = moonPhase?.description ?? "nil"
-		properties["nearestStormDistance"] = nearestStormDistance?.description ?? "nil"
-		properties["nearestStormBearing"] = nearestStormBearing?.description ?? "nil"
-		properties["precipitationIntensity"] = precipitationIntensity?.description ?? "nil"
-		properties["precipitationIntensityMax"] = precipitationIntensityMax?.description ?? "nil"
-		properties["precipitationIntensityMaxTime"] = precipitationIntensityMaxTime?.description ?? "nil"
-		properties["precipitationType"] = precipitationType?.rawValue ?? "nil"
-		properties["precipitationAccumulation"] = precipitationAccumulation?.description ?? "nil"
-		properties["temperature"] = temperature?.description ?? "nil"
-		properties["temperatureLow"] = temperatureLow?.description ?? "nil"
-		properties["temperatureHigh"] = temperatureHigh?.description ?? "nil"
-		properties["temperatureHighTime"] = temperatureHighTime?.description ?? "nil"
-		properties["apparentTemperatureLow"] = apparentTemperatureLow?.description ?? "nil"
-		properties["apparentTemperatureLowTime"] = apparentTemperatureLowTime?.description ?? "nil"
-		properties["apparentTemperatureHigh"] = apparentTemperatureHigh?.description ?? "nil"
-		properties["apparentTemperatureHighTime"] = apparentTemperatureHighTime?.description ?? "nil"
-		properties["dewPoint"] = dewPoint?.description ?? "nil"
-		properties["windGust"] = windGust?.description ?? "nil"
-		properties["windSpeed"] = windSpeed?.description ?? "nil"
-		properties["windBearing"] = windBearing?.description ?? "nil"
-		properties["cloudCover"] = cloudCover?.description ?? "nil"
-		properties["humidity"] = humidity?.description ?? "nil"
-		properties["pressure"] = pressure?.description ?? "nil"
-		properties["visibility"] = visibility?.description ?? "nil"
-		properties["ozone"] = ozone?.description ?? "nil"
-		properties["uvIndex"] = uvIndex?.description ?? "nil"
-		properties["uvIndexTime"] = uvIndexTime?.description ?? "nil"
+	func updateEvents() {
+		let events = WeatherService.shared.hourlyEvents(round: Date())
+		let existingEvents = weatherEvents.keys.map({ $0 })
 		
-		return "DataPoint: \n\t" + properties.sorted { (lhs, rhs) -> Bool in
-			return lhs.key < rhs.key
-			}.map { (entry) -> String in
-				return "\(entry.key) = \(entry.value)"
-			}.joined(separator: "\n\t")
+		let remaining = existingEvents.filter({ events.contains($0) })
+		let outOfDate = existingEvents.filter({ !remaining.contains($0) })
+		
+		let toRemove = weatherEvents.filter( { outOfDate.contains($0.key) } )
+		for entry in toRemove {
+			guard let view = weatherEvents.removeValue(forKey: entry.key) else {
+				log(debug: "Missing view for event?")
+				continue
+			}
+			view.removeFromSuperview()
+		}
+		
+		let toAdd = events.filter( { !remaining.contains($0)} )
+		for event in toAdd {
+			let view = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: weatherIconSize))
+			view.contentMode = .scaleAspectFit
+			view.image = event.icon?.image
+			weatherEvents[event] = view
+			log(debug: "Add new view")
+			backgroundView.insertSubview(view, at: 0)
+		}
+	}
+	
+	func updateReport() {
+		// This just gives us a single point in time to work from...
+		let now = Date()
+		let startTime = now.byAdding(hours: -12)
+		let endTime = now.byAdding(hours: 12)
+		let range = endTime.timeIntervalSince(startTime)
+		
+		log(debug: "now = \(now); startTime = \(startTime); endTime = \(endTime)")
+		
+		let keys = weatherEvents.keys.sorted { (lhs, rhs) -> Bool in
+			return lhs.time < rhs.time
+		}
+		
+		for key in keys {
+			let view = weatherEvents[key]
+			let progress = key.time.timeIntervalSince(startTime) / range
+			log(debug: "event \(key.time) @ \(progress)")
+			if progress > 1.0 {
+				// No longer valid
+				view?.removeFromSuperview()
+			} else if progress < 0.0 {
+				// It's coming, but we don't need to display it
+				view?.isHidden = true
+			} else {
+				view?.isHidden = false
+				view?.center = point(on: weatherTrack, at: progress)
+			}
+		}
 	}
 	
 }
